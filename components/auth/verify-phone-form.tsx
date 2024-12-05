@@ -110,7 +110,7 @@ export const VerifyPhoneForm: FC = () => {
                   </div>
                 </FormControl>
                 <FormDescription className="w-full text-center">
-                  Please enter the one-time password sent to your email.
+                  Please enter the one-time password sent to your phone.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

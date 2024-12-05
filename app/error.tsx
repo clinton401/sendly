@@ -13,7 +13,7 @@ function ErrorPage({ error, reset }: { error: Error,  reset: () => void }) {
       reset();
     }
     return (
-      <main className=" min-h-dvh  overflow-hidden relative py-4 px-p-half flex flex-col items-center gap-4 justify-center ">
+      <main className=" min-h-dvh  overflow-hidden relative py-4 px-hz flex flex-col items-center gap-4 justify-center ">
         <h1
           className={`w-full text-center text-destructive text-4xl font-black uppercase  ${cinzel.className}`}
         >
