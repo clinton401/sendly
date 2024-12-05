@@ -16,7 +16,7 @@ export const MotionComponent = <T extends ElementType = "div">({
   ...motionProps
 }: MotionComponentProps<T>) => {
   const Tag = as || "div"; 
-  const MotionTag = motion(Tag as ForwardRefExoticComponent<any>) as React.ElementType; 
+  const MotionTag = motion(Tag as ForwardRefExoticComponent<unknown>) as React.ElementType; 
   // ForwardRefExoticComponent<any>
   return (
     <MotionTag className={className} {...motionProps}>

@@ -134,7 +134,7 @@ const App: FC = () => {
           Trusted by businesses and individuals alike
         </h3>
         <p className="w-full md:text-center text-sm">
-          Don't just take our word for it. Here's what our customers have to say
+          Don&rsquo;t just take our word for it. Here&rsquo;s what our customers have to say
           about Sendly.
         </p>
         <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-3">

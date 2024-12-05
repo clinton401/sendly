@@ -52,11 +52,13 @@ export const VerifyPhoneForm: FC = () => {
       setSuccess(undefined);
       return;
     }
+    console.log(values)
     
     setIsPending(true);
     setError(undefined);
     setSuccess("Phone number verified successfully.");
     setIsPending(false);
+    form.reset()
    
   };
   async function resendCode() {

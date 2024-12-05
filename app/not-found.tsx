@@ -14,7 +14,7 @@ const NotFound: FC = () => {
         Oops! Page Not Found
       </h1>
       <p className="text-center">
-        The page you're looking for doesn't exist or has been moved.
+        The page you&rsquo;re looking for doesn&rsquo;t exist or has been moved.
       </p>
 
       <Button asChild>

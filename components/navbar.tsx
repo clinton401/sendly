@@ -74,7 +74,7 @@ export const Navbar: FC = () => {
           <ul className="flex items-center gap-4">
             {links.map(link => {
                 return (
-                    <li key={link.name}><Link href={link.url} className={`text-lg font-bold  hover:text-primary transition-colors ease-in duration-200`}>{link.name}</Link></li>
+                    <li key={link.name}><Link href={link.url} className={`text-lg font-bold ${cinzel.className} hover:text-primary transition-colors ease-in duration-200`}>{link.name}</Link></li>
                 )
             })}
           </ul>
