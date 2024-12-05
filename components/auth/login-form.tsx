@@ -93,7 +93,7 @@ export const LoginForm: FC = () => {
             </Button>
           </div>
         {success && <FormSuccess message={success} />}
-        <LoadingButton isPending={isPending} message="Create account" />
+        <LoadingButton isPending={isPending} message="Login" />
       </form>
     </Form>
   );
