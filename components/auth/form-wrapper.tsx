@@ -3,6 +3,8 @@ import { cinzel } from "@/lib/fonts";
 import logo from "../../public/logo.png";
 import { Images } from "@/components/images";
 import Link from "next/link";
+import {appearAnimation} from "@/lib/motion";
+import {MotionComponent} from "@/components/motion-component"
 type FormWrapperProps = {
     children: ReactNode;
     title: string
@@ -18,7 +20,7 @@ export const FormWrapper: FC<FormWrapperProps> = ({children, title, backButtonTe
   
   return (
 <div className="flex flex-col items-center px-hz pb-8 pt-[100px] justify-center min-h-dvh w-full gap-4">
-      <div className="flex flex-col  lg:w-[50%] max-w-[500px] w-full gap-4">
+      <MotionComponent variants={appearAnimation} initial="hidden" animate="visible" className="flex flex-col  lg:w-[50%] max-w-[500px] w-full gap-4">
         <span className="relative w-[60px] aspect-square overflow-hidden ">
           <Images url={logo} alt="website logo" />
         </span>
@@ -37,7 +39,7 @@ export const FormWrapper: FC<FormWrapperProps> = ({children, title, backButtonTe
 
 
         {children}
-      </div>
+      </MotionComponent>
       
     </div>
   )
