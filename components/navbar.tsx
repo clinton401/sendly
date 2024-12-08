@@ -8,34 +8,7 @@ import {Button} from "@/components/ui/button";
 import {ModeToggle} from "@/components/mode-toggle";
 import { Divide as Hamburger } from 'hamburger-react';
 import {motion, AnimatePresence} from "motion/react";
-const hamMenu = {
-    hidden: {
-      opacity: 0,
-      scale: 0.9,
-      filter: "blur(10px)",
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      y: 0,
-      transition: {
-        duration: 0.2,
-        ease: "easeIn",
-      },
-    },
-    exit: {
-        opacity: 0,
-        scale: 0.9,
-        filter: "blur(10px)",
-        y: 50,
-        transition: {
-            duration: 0.2,
-            ease: "easeIn",
-          },
-    }
-  };
+import {hamMenu} from "@/lib/motion";
 export const Navbar: FC = () => {
     const [isOpen, setOpen] = useState(false);
   useEffect(() => {
@@ -53,7 +26,9 @@ export const Navbar: FC = () => {
   const links = [
     { name: "Home", url: "/" },
     { name: "How It Works ", url: "/#howitworks" },
-    { name: "Testimonials", url: "/#testimonials" },
+    // { name: "Testimonials", url: "/#testimonials" },
+    
+    { name: "Create Order", url: "/delivery" },
   ];
 
   return (

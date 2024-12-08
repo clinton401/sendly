@@ -20,7 +20,7 @@ function ErrorPage({ error, reset }: { error: Error,  reset: () => void }) {
           Something went wrong
         </h1>
         <h2
-          className={`w-full text-center  text-2xl font-bold  ${cinzel.className}`}
+          className={`w-full text-center  text-2xl font-bold  `}
         >
           {error.message}
         </h2>

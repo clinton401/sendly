@@ -90,7 +90,10 @@
 .mobile_ham_menu {
   top: calc(100% + 8px)
 }
+.delivery_tab_btn {
 
+  width: calc(50% - 2px)
+}
 
 .leap-frog {
   --uib-size: 30px;
@@ -161,5 +164,11 @@
  
   100% {
    transform: translateX(0) rotate(0deg);
+  }
+ }
+
+ @media screen and (max-width: 290px) {
+  .delivery_tab_btn {
+    width: 100%;
   }
  }

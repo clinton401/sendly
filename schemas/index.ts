@@ -8,7 +8,7 @@ export const RegisterSchema = z.object({
     }),
     phone: z
     .string().trim()
-    .regex(/^\+?[1-9]\d{1,14}$/, {
+    .regex(/^\+[1-9]\d{1,14}$/, {
       message: "Invalid phone number format.",
     }),
     password:  z.string()

@@ -56,9 +56,13 @@ export const VerifyPhoneForm: FC = () => {
     
     setIsPending(true);
     setError(undefined);
-    setSuccess("Phone number verified successfully.");
-    setIsPending(false);
+    setTimeout(() => {
+      
+      setSuccess(`Phone number verified successfully.`);
+      setIsPending(false);
+      
     form.reset()
+      }, 5000)
    
   };
   async function resendCode() {

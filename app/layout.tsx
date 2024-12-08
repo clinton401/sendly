@@ -3,7 +3,7 @@ import {Urbanist} from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider";
 import {Navbar} from "@/components/navbar"
 import "./globals.css";
-
+import { Toaster } from "@/components/ui/toaster"
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200" ,"300" , "400"  , "500", "600", "700", "800",  "900" ] });
 
 export const metadata: Metadata = {
@@ -16,10 +16,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Sendly',
     description: 'Sendly connects you with trusted delivery agents to transport your goods safely, quickly, and affordably anywhere, anytime.',
-    url: 'https://sendly.com',  // Update with your actual website URL
+    url: 'https://sendlyy.vercel.app',  
     images: [
       {
-        url: '/assets/sendly-thumbnail.png',  // Update with your actual image path
+        url: '/assets/home.png',  
         width: 1200,
         height: 627,
         alt: 'Sendly - Trusted Delivery Agents',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: 'Need a delivery agent? Sendly helps you transport your goods securely and efficiently with verified agents.',
     images: [
       {
-        url: '/assets/sendly-thumbnail.png', 
+        url: '/assets/home.png', 
         alt: 'Sendly - Trusted Delivery Agents',
       },
     ],
@@ -57,7 +57,7 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-          >
+          ><Toaster/>
             <Navbar />
             {children}
           </ThemeProvider>

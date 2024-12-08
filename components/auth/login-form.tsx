@@ -32,9 +32,13 @@ export const LoginForm: FC = () => {
   const submitHandler = (values: z.infer<typeof LoginSchema>) => {
     console.log(values);
     setIsPending(true);
-    setSuccess(`Login registered successfully`);
-    setIsPending(false);
+    setTimeout(() => {
+      
+      setSuccess(`Login successful`);
+      setIsPending(false);
+      
     form.reset()
+      }, 5000)
   };
   return (
     <Form {...form}>

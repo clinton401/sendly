@@ -33,9 +33,12 @@ export const RegisterForm: FC = () => {
   const submitHandler = (values: z.infer<typeof RegisterSchema>) => {
     console.log(values);
     setIsPending(true);
+    setTimeout(() => {
+      
     setSuccess(`${values.name} registered successfully`);
     setIsPending(false);
     form.reset()
+    }, 5000)
   };
   return (
     <Form {...form}>
@@ -63,7 +66,7 @@ export const RegisterForm: FC = () => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone Number</FormLabel>
+              <FormLabel>Phone Number (Start with country code e.g +234)</FormLabel>
               <FormControl>
                 <Input
                   disabled={isPending}
