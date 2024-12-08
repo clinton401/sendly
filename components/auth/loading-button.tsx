@@ -1,7 +1,7 @@
 import {FC} from 'react'
 import {Button} from "@/components/ui/button";
 import {Loader} from "lucide-react"
-import {MiniLoader} from "@/components/mini-loader"
+// import {MiniLoader} from "@/components/mini-loader"
 type LoadingButtonProps ={
     isPending: boolean,
     message: string,
