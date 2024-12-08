@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: 'https://sendlyy.vercel.app/register',
     images: [
       {
-        url: '/assets/register.png',
+        url: '/register.png',
         width: 1200,
         height: 627,
         alt: 'Sendly Register',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Create an account on Sendly to manage your deliveries and find trusted agents.',
     images: [
       {
-        url: '/assets/register.png',
+        url: '/register.png',
         alt: 'Sendly Register',
       },
     ],

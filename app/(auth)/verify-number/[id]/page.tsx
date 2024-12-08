@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: 'https://sendlyy.vercel.app/verify-number/:id',
     images: [
       {
-        url: '/assets/verify-number.png',
+        url: '/verify-number.png',
         width: 1200,
         height: 627,
         alt: 'Sendly Verify Number',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: 'Verify your phone number to enhance the security of your Sendly account.',
     images: [
       {
-        url: '/assets/verify-number.png',
+        url: '/verify-number.png',
         alt: 'Sendly Verify Number',
       },
     ],

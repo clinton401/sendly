@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: 'https://sendlyy.vercel.app/login',  
     images: [
       {
-        url: '/assets/login.png',
+        url: '/login.png',
         width: 1200,
         height: 627,
         alt: 'Sendly Login',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: 'Login to manage your deliveries and find agents quickly and easily on Sendly.',
     images: [
       {
-        url: '/assets/login.png',
+        url: '/login.png',
         alt: 'Sendly Login',
       },
     ],

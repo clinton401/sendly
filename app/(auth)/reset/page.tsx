@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: 'https://sendlyy.vercel.app/reset',
     images: [
       {
-        url: '/assets/reset.png',
+        url: '/reset.png',
         width: 1200,
         height: 627,
         alt: 'Sendly Forgot Password',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: 'Reset your password for your Sendly account and continue managing your deliveries.',
     images: [
       {
-        url: '/assets/reset.png',
+        url: '/reset.png',
         alt: 'Sendly Forgot Password',
       },
     ],

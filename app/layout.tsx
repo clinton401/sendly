@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: 'https://sendlyy.vercel.app',  
     images: [
       {
-        url: '/assets/home.png',  
+        url: '/home.png',  
         width: 1200,
         height: 627,
         alt: 'Sendly - Trusted Delivery Agents',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: 'Need a delivery agent? Sendly helps you transport your goods securely and efficiently with verified agents.',
     images: [
       {
-        url: '/assets/home.png', 
+        url: '/home.png', 
         alt: 'Sendly - Trusted Delivery Agents',
       },
     ],

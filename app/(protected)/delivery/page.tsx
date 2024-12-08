@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     openGraph: {
       title: 'Delivery',
       description: 'Create, track, and manage your deliveries easily. Find the best agents for your goods instantly with Sendly.',
-      url: 'https://sendly.com/delivery',
+      url: 'https://sendlyy.vercel.app/delivery',
       images: [
         {
-          url: '/assets/delivery.png',
+          url: '/delivery.png',
           width: 1200,
           height: 627,
           alt: 'Sendly Delivery',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
       description: 'Track your orders and find reliable agents for your delivery with Sendly.',
       images: [
         {
-          url: '/assets/delivery.png',
+          url: '/delivery.png',
           alt: 'Sendly Delivery',
         },
       ],
