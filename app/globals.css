@@ -91,7 +91,7 @@
   top: calc(100% + 8px)
 }
 .delivery_tab_btn {
-
+color: hsl(var(--foreground));
   width: calc(50% - 2px)
 }
 

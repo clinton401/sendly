@@ -93,13 +93,13 @@ orderStatus: OrderStatus.PENDING,
   return (
     <div className="w-full flex flex-col  ">
       <section className="w-full flex items-center justify-center ">
-        <div className="flex items-center flex-wrap  gap-1 justify-center p-1 rounded-lg bg-secondary max-w-[400px] w-full">
+        <div className="flex items-center flex-wrap text-foreground  gap-1 justify-center p-1 rounded-lg bg-secondary max-w-[400px] w-full">
           <Button
             className={`${
               tab === "CREATE"
                 ? "bg-primary"
                 : "hover:bg-transparent bg-secondary"
-            } transtition-colors duration-300 ease-in items-center delivery_tab_btn p-2 text-sm`}
+            } transtition-colors duration-300 ease-in items-center delivery_tab_btn p-2 text-sm text-foreground`}
             onClick={() => tabHandler("CREATE")}
           >
             <Package className="mr-1" /> Create Order
@@ -109,7 +109,7 @@ orderStatus: OrderStatus.PENDING,
               tab === "TRACK"
                 ? "bg-primary"
                 : "hover:bg-transparent bg-secondary"
-            } transtition-colors duration-300 ease-in items-center delivery_tab_btn p-2 text-sm`}
+            } transtition-colors duration-300 ease-in items-center delivery_tab_btn p-2 text-sm text-foreground`}
             onClick={() => tabHandler("TRACK")}
           >
             <Truck className="mr-1" />
