@@ -3,7 +3,8 @@ import {Urbanist} from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider";
 import {Navbar} from "@/components/navbar"
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
+import { ContextProvider } from "@/components/context-provider";
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200" ,"300" , "400"  , "500", "600", "700", "800",  "900" ] });
 
 export const metadata: Metadata = {
@@ -58,8 +59,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           ><Toaster/>
+           <ContextProvider>
             <Navbar />
             {children}
+           </ContextProvider>
+
           </ThemeProvider>
       </body>
     </html>

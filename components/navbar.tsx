@@ -4,13 +4,13 @@ import logo from "../public/logo.png";
 import Link from "next/link";
 import { Images } from "@/components/images";
 import { cinzel } from "@/lib/fonts";
-import {Button} from "@/components/ui/button";
-import {ModeToggle} from "@/components/mode-toggle";
-import { Divide as Hamburger } from 'hamburger-react';
-import {motion, AnimatePresence} from "motion/react";
-import {hamMenu} from "@/lib/motion";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Divide as Hamburger } from "hamburger-react";
+import { motion, AnimatePresence } from "motion/react";
+import { hamMenu } from "@/lib/motion";
 export const Navbar: FC = () => {
-    const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   useEffect(() => {
     if (isOpen) {
       document.body.style.height = "100dvh";
@@ -25,10 +25,9 @@ export const Navbar: FC = () => {
   };
   const links = [
     { name: "Home", url: "/" },
-    { name: "How It Works ", url: "/#howitworks" },
-    // { name: "Testimonials", url: "/#testimonials" },
-    
-    { name: "Create Order", url: "/delivery" },
+    { name: "Find Agents ", url: "/find-agents" },
+
+    { name: "My Orders", url: "/my-orders" },
   ];
 
   return (
@@ -47,54 +46,68 @@ export const Navbar: FC = () => {
         </nav>
         <nav className="hidden md:flex ">
           <ul className="flex items-center gap-4">
-            {links.map(link => {
-                return (
-                    <li key={link.name}><Link href={link.url} className={`text-lg font-bold ${cinzel.className} hover:text-primary transition-colors ease-in duration-200`}>{link.name}</Link></li>
-                )
+            {links.map((link) => {
+              return (
+                <li key={link.name}>
+                  <Link
+                    href={link.url}
+                    className={`text-lg font-bold ${cinzel.className} hover:text-primary transition-colors ease-in duration-200`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
             })}
           </ul>
         </nav>
         <nav className="hidden md:flex items-center gap-4 ">
-            
-        <ModeToggle/>
-            <Button asChild >
-                <Link href="/register">Get Started</Link>
-            </Button>
+          <ModeToggle />
+          <Button asChild>
+            <Link href="/register">Get Started</Link>
+          </Button>
         </nav>
         <nav className="flex md:hidden items-center gap-4">
-            
-        <ModeToggle/>
-        <Hamburger
-          toggled={isOpen}
-          toggle={setOpen}
-          size={20}
-          distance="sm"
-          rounded
-          label="Show menu"
-        />
+          <ModeToggle />
+          <Hamburger
+            toggled={isOpen}
+            toggle={setOpen}
+            size={20}
+            distance="sm"
+            rounded
+            label="Show menu"
+          />
         </nav>
         <AnimatePresence>
-            {isOpen &&  <motion.div variants={hamMenu} initial="hidden" animate="visible" exit="exit" key="hamMenu" className="absolute mobile_ham_menu md:hidden p-4 bg-background  w-full rounded-md border left-0">
-        <ul className="w-full text-lg font-semibol flex flex-col  gap-4">
-            {links.map(link => {
-                return <li key={link.name}>
-                    <Link href={link.url} onClick={modalHandler}>{link.name}</Link>
+          {isOpen && (
+            <motion.div
+              variants={hamMenu}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              key="hamMenu"
+              className="absolute mobile_ham_menu md:hidden p-4 bg-background  w-full rounded-md border left-0"
+            >
+              <ul className="w-full text-lg font-semibol flex flex-col  gap-4">
+                {links.map((link) => {
+                  return (
+                    <li key={link.name}>
+                      <Link href={link.url} onClick={modalHandler}>
+                        {link.name}
+                      </Link>
+                    </li>
+                  );
+                })}
+                <li className="flex items-center w-full justify-between gap-x-2 gap-y-4 flex-wrap">
+                  <Button asChild>
+                    <Link href="/register">Get Started</Link>
+                  </Button>
+                  <ModeToggle />
                 </li>
-            })}
-            <li className="flex items-center w-full justify-between gap-x-2 gap-y-4 flex-wrap">
-           
-            <Button asChild >
-                <Link href="/register">Get Started</Link>
-            </Button>
-            <ModeToggle/>
-            </li>
-        </ul>
-      </motion.div>}
-            </AnimatePresence>
-       
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      
-      
     </header>
   );
 };

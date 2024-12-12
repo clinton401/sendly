@@ -72,7 +72,7 @@ const App: FC = () => {
             Experience hassle-free logistics with real-time tracking and
             competitive pricing.
           </p>
-          <Button asChild size="lg" className="w-full md:w-[150px]">
+          <Button asChild size="lg" className="w-full md:w-[200px] py-4">
             <Link href="/register">Get Started</Link>
           </Button>
         </div>

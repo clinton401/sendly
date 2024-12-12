@@ -1,4 +1,4 @@
-import { useState, FC, Dispatch, SetStateAction } from "react";
+import { useState, FC } from "react";
 import { cinzel } from "@/lib/fonts";
 import { MapPin, User, Phone, FileText, Truck } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -11,11 +11,9 @@ type InputType = React.ChangeEvent<HTMLInputElement>;
 type TextareaType = React.ChangeEvent<HTMLTextAreaElement>;
 type CreateDeliveryProps = {
   ordersHandler: (details: DeliveryDetailsType) => void;
-  setTab: Dispatch<SetStateAction<"CREATE" | "TRACK">>;
 };
 export const CreateDelivery: FC<CreateDeliveryProps> = ({
   ordersHandler,
-  setTab,
 }) => {
   const [isPending, setIsPending] = useState(false);
   const [deliveryData, setDeliveryData] = useState({
@@ -79,7 +77,6 @@ export const CreateDelivery: FC<CreateDeliveryProps> = ({
         recipientPhone: "",
         extra: "",
       });
-      setTab("TRACK");
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
@@ -179,8 +176,8 @@ export const CreateDelivery: FC<CreateDeliveryProps> = ({
         </div>
         <LoadingButton
           isPending={isPending}
-          message="Submit Order"
-          loadingText="Searching for agents.."
+          message="Find agent"
+          // loadingText="Searching for agents.."
         />
       </form>
     </div>

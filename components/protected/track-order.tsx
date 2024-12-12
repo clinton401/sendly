@@ -1,4 +1,5 @@
-import { FC, Dispatch, SetStateAction, useState } from "react";
+"use client"
+import { FC,  useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,20 +8,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { type Order } from "@/components/protected/delivery-tab";
+import { appContext, type Order, OrderStatus } from "@/components/context-provider";
 import { cinzel } from "@/lib/fonts";
-import { OrderStatus } from "@/components/protected/delivery-tab";
 import { Loader, Check, X } from "lucide-react";
 import createToast from "@/hooks/create-toast";
-type TrackOrderProps = {
-  orders: Order[];
-  setOrders: Dispatch<SetStateAction<Order[]>>;
-  setViewMore: Dispatch<SetStateAction<boolean>>;
-  viewMore: boolean
-};
-export const TrackOrder: FC<TrackOrderProps> = ({ orders, setOrders, viewMore, setViewMore }) => {
+
+export const TrackOrder: FC = () => {
     const [isPending, setIsPending] = useState(false);
+    const [viewMore, setViewMore] =useState(false)
     const [isDeletePending, setIsDeletePending] = useState(false);
+    const {orders, setOrders} = useContext(appContext)
     const {createError, createSimple} = createToast();
    
   const handleViewMore = () => {
@@ -63,7 +60,7 @@ export const TrackOrder: FC<TrackOrderProps> = ({ orders, setOrders, viewMore, s
       <h2
         className={`${cinzel.className} font-black text-xl text-center sm:text-2xl`}
       >
-        Track your orders
+   My orders
       </h2>
       {orders.length < 1 && (
         <h1 className="w-full  text-center text-2xl font-bold ">
@@ -72,7 +69,7 @@ export const TrackOrder: FC<TrackOrderProps> = ({ orders, setOrders, viewMore, s
       )}
       {orders.length > 0 && (
         <div className="flex flex-col gap-4 w-full">
-          {orders.slice(0, 1).map((order) => {
+          {orders.slice(0, 15).map((order) => {
             return (
               <Card key={order.orderId} className="w-full">
                 <CardHeader>
@@ -163,7 +160,7 @@ Searching for Agent
           })}
         
             {orders.length > 1 && viewMore && <>
-                {orders.slice(1).map((order) => {
+                {orders.slice(15).map((order) => {
             return (
               <Card key={order.orderId} className="w-full">
                 <CardHeader>
@@ -252,7 +249,7 @@ Searching for Agent
             );
           })}
             </>}
-            {orders.length > 1 && <div className="w-full flex items-center justify-center ">
+            {orders.length > 15 && <div className="w-full flex items-center justify-center ">
             <Button disabled={isPending} className="w-full" onClick={handleViewMore}>{isPending ? <span className="flex items-center"><Loader className="h-4 w-4 animate-spin mr-2" /> Loading...</span> : <> {viewMore ? "View less" : "View more"}  </>}</Button>
             </div>}
         </div>
