@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { appContext, type Order, OrderStatus } from "@/components/context-provider";
+import { appContext, OrderStatus } from "@/components/context-provider";
 import { cinzel } from "@/lib/fonts";
 import { Loader, Check, X } from "lucide-react";
 import createToast from "@/hooks/create-toast";
