@@ -7,7 +7,6 @@ export default {
   providers: [
 
     Credentials({ 
-       name: "Credentials",
       credentials: {
         phone: { label: "Phone", type: "text" },
         password: { label: "Password", type: "password" }
