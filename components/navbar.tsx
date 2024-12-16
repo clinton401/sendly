@@ -4,7 +4,6 @@ import logo from "../public/logo.png";
 import Link from "next/link";
 import { Images } from "@/components/images";
 import { cinzel } from "@/lib/fonts";
-import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Divide as Hamburger } from "hamburger-react";
 import { motion, AnimatePresence } from "motion/react";
