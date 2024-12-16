@@ -176,6 +176,7 @@ export const CreateDelivery: FC<CreateDeliveryProps> = ({
         </div>
         <LoadingButton
           isPending={isPending}
+          disabled={isPending}
           message="Find agent"
           // loadingText="Searching for agents.."
         />

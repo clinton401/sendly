@@ -64,7 +64,8 @@ export const AuthButton: FC<{
 
             <DropdownMenuItem
               className="flex cursor-pointer items-center"
-              onClick={handleLogout}
+              onClick={handleLogout} 
+              disabled={isPending}
             >
               <LogOut className="h-4 w-4 mr-1" />
               Log out
@@ -75,7 +76,8 @@ export const AuthButton: FC<{
       {session && mobile && (
         <Button
           className="  flex items-center w-[100px]"
-          onClick={handleLogout}
+          onClick={handleLogout} 
+          disabled={isPending}
         >
           {isPending ? <Loader className="animate-spin h-4 w-4" /> : " Log out"}
         </Button>
