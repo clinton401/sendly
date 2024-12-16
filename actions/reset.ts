@@ -9,7 +9,7 @@ import { unknown_error, user_not_found } from "@/lib/variables";
 import { UserModel } from "@/nobox/record-structures/user";
 import { hasExpired } from "@/lib/auth-utils";
 import { twillio } from "@/lib/twillio";
-import { validatePassword } from "@/lib/password-utils";
+import { validatePassword, genPasswordHash } from "@/lib/password-utils";
 
 export const reset = async (
   values: z.infer<ReturnType<typeof ResetSchema>>,
@@ -123,7 +123,8 @@ export const reset = async (
         redirectUrl: undefined,
         isOtpSent: false,
       };
-    await UserModel.updateOneById(user.id, { password: newPassword });
+      const hashedPassword = await genPasswordHash(newPassword)
+    await UserModel.updateOneById(user.id, { password: hashedPassword });
     await ResetCodeModel.deleteOneById(foundToken.id)
     return {
       success: "Password changed successfully",
