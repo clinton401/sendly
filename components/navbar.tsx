@@ -10,8 +10,8 @@ import { Divide as Hamburger } from "hamburger-react";
 import { motion, AnimatePresence } from "motion/react";
 import { hamMenu } from "@/lib/motion";
 import type { SessionType } from "@/lib/types";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-export const Navbar: FC<{session: SessionType}> = ({session}) => {
+import { AuthButton } from "@/components/auth-button";
+export const Navbar: FC<{session: SessionType | undefined}> = ({session}) => {
   const [isOpen, setOpen] = useState(false);
   useEffect(() => {
     if (isOpen) {
@@ -64,9 +64,7 @@ export const Navbar: FC<{session: SessionType}> = ({session}) => {
         </nav>
         <nav className="hidden md:flex items-center gap-4 ">
           <ModeToggle />
-          <Button asChild>
-            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/register"}  `}>Get Started</Link>
-          </Button>
+       <AuthButton setOpen={setOpen} session={session} mobile={false}/>
         </nav>
         <nav className="flex md:hidden items-center gap-4">
           <ModeToggle />
@@ -100,9 +98,7 @@ export const Navbar: FC<{session: SessionType}> = ({session}) => {
                   );
                 })}
                 <li className="flex items-center w-full justify-between gap-x-2 gap-y-4 flex-wrap">
-                  <Button asChild>
-                    <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/register"}  `}>Get Started</Link>
-                  </Button>
+                 <AuthButton setOpen={setOpen} session={session}  mobile/>
                   <ModeToggle />
                 </li>
               </ul>

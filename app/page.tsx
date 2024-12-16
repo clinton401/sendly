@@ -76,7 +76,7 @@ const App: FC = async() => {
             competitive pricing.
           </p>
           <Button asChild size="lg" className="w-full md:w-[200px] py-4">
-            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/register"}  `}>Get Started</Link>
+            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/login"}  `}>Get Started</Link>
           </Button>
         </div>
       </MotionComponent>
@@ -187,7 +187,7 @@ const App: FC = async() => {
           Join Sendly today and revolutionize your deliveries.
           </h3>
           <Button asChild size="lg" className="">
-            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/register"}  `}>Get Started</Link>
+            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/login"}  `}>Get Started</Link>
           </Button>
         </MotionComponent>
     </main>

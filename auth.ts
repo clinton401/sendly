@@ -13,7 +13,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     async signIn({ user }) {
-      console.log(user)
       const customUser = user as User;
  
       if(!customUser || !customUser.phone) return false;
@@ -35,7 +34,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         
         user = await UserModel.findOne({id: token.sub});
       }
-      console.log({jwt: user})
       if (user) {
           token.phone = user.phone
           token.sub = user.id;
