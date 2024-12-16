@@ -7,7 +7,10 @@ import { appearAnimation } from "@/lib/motion";
 import { Package, CheckCircle, Truck, User2 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-const App: FC = () => {
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import getServerUser from "@/hooks/get-server-user";
+const App: FC = async() => {
+  const session = await getServerUser()
   const steps = [
     {
       icon: Package,
@@ -73,7 +76,7 @@ const App: FC = () => {
             competitive pricing.
           </p>
           <Button asChild size="lg" className="w-full md:w-[200px] py-4">
-            <Link href="/register">Get Started</Link>
+            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/register"}  `}>Get Started</Link>
           </Button>
         </div>
       </MotionComponent>
@@ -184,7 +187,7 @@ const App: FC = () => {
           Join Sendly today and revolutionize your deliveries.
           </h3>
           <Button asChild size="lg" className="">
-            <Link href="/register">Get Started</Link>
+            <Link href={` ${session? DEFAULT_LOGIN_REDIRECT : "/register"}  `}>Get Started</Link>
           </Button>
         </MotionComponent>
     </main>

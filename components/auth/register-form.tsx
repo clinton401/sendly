@@ -2,7 +2,7 @@
 import { useState, FC } from "react";
 import { z } from "zod";
 import { RegisterSchema } from "@/schemas";
-
+import { register } from "@/actions/register";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -16,9 +16,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { FormSuccess } from "@/components/form-success";
 import { LoadingButton } from "@/components/auth/loading-button";
-
+import { unknown_error } from "@/lib/variables";
+import { FormError } from "@/components/form-error";
+import {useRouter} from "next/navigation";
 export const RegisterForm: FC = () => {
   const [success, setSuccess] = useState<undefined | string>(undefined);
+  const [error, setError] = useState<undefined | string>(undefined);
   const [isPending, setIsPending] = useState(false);
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -29,16 +32,32 @@ export const RegisterForm: FC = () => {
       address: undefined,
     },
   });
+  const {push} = useRouter();
 
-  const submitHandler = (values: z.infer<typeof RegisterSchema>) => {
-    console.log(values);
-    setIsPending(true);
-    setTimeout(() => {
-      
-    setSuccess(`${values.name} registered successfully`);
-    setIsPending(false);
-    form.reset()
-    }, 5000)
+  const submitHandler = async (values: z.infer<typeof RegisterSchema>) => {
+    try {
+      setIsPending(true);
+      setSuccess(undefined);
+      setError(undefined);
+      const response = await register(values);
+      const {error, success, redirectUrl} = response;
+      if(error || !success) {
+        setError(error || unknown_error);
+        return ;
+      }
+      setSuccess(success);
+     
+      if(redirectUrl) {
+        push(redirectUrl);
+      }
+      form.reset();
+    } catch (err) {
+      console.error(`Unable to register user: ${err}`);
+      setError(unknown_error);
+      setSuccess(undefined)
+    } finally {
+      setIsPending(false);
+    }
   };
   return (
     <Form {...form}>
@@ -66,7 +85,9 @@ export const RegisterForm: FC = () => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone Number (Start with country code e.g +234)</FormLabel>
+              <FormLabel>
+                Phone Number (Start with country code e.g +234)
+              </FormLabel>
               <FormControl>
                 <Input
                   disabled={isPending}
@@ -89,7 +110,7 @@ export const RegisterForm: FC = () => {
                 <Input
                   disabled={isPending}
                   placeholder="123 Main Street, Apt 4B, Springfield, IL 62704"
-                  type="password"
+             
                   {...field}
                 />
               </FormControl>
@@ -118,8 +139,9 @@ export const RegisterForm: FC = () => {
           )}
         />
 
-        {success && <FormSuccess message={success} />}
-        <LoadingButton isPending={isPending} message="Create account" />
+        {error && <FormError message={error} />}
+        {success && !error && <FormSuccess message={success} />}
+        <LoadingButton isPending={isPending} message="Create account" disabled={isPending} />
       </form>
     </Form>
   );

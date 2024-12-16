@@ -21,17 +21,20 @@ import {
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { LoadingButton } from "@/components/auth/loading-button";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { RegenerateButton } from "@/components/auth/regenerate-button";
 import useCountdown from "@/hooks/use-countdown";
+import { verifyNumber } from "@/actions/verify-number";
+import { unknown_error } from "@/lib/variables";
+import { regenerateNumberverificationCode } from "@/actions/regenerate-number-verification-code";
 export const VerifyPhoneForm: FC = () => {
   const [isPending, setIsPending] = useState(false);
   const [isNewEmailPending, setIsNewEmailPending] = useState(false);
   const [error, setError] = useState<undefined | string>(undefined);
   const [success, setSuccess] = useState<undefined | string>(undefined);
   const { id } = useParams();
-//   const { push } = useRouter();
-//   const redirect = useGetRedirectUrl();
+  const { push } = useRouter();
+  //   const redirect = useGetRedirectUrl();
   const {
     isNewClicked: isResendClicked,
     setIsNewClicked: setIsResendClicked,
@@ -52,18 +55,29 @@ export const VerifyPhoneForm: FC = () => {
       setSuccess(undefined);
       return;
     }
-    console.log(values)
-    
-    setIsPending(true);
-    setError(undefined);
-    setTimeout(() => {
-      
-      setSuccess(`Phone number verified successfully.`);
+    try {
+      setIsPending(true);
+      setSuccess(undefined);
+      setError(undefined);
+      const response = await verifyNumber(values, userId);
+      const { success, redirectUrl, error } = response;
+      if (error || !success) {
+        setError(error || unknown_error);
+        return;
+      }
+      setSuccess(success);
+
+      if (redirectUrl) {
+        push(redirectUrl);
+      }
+      form.reset();
+    } catch (error) {
+      console.error(`Unable to verify phone number: ${error}`);
+      setError(unknown_error);
+      setSuccess(undefined);
+    } finally {
       setIsPending(false);
-      
-    form.reset()
-      }, 5000)
-   
+    }
   };
   async function resendCode() {
     const userId = Array.isArray(id) ? id[0] : id;
@@ -73,16 +87,32 @@ export const VerifyPhoneForm: FC = () => {
       setSuccess(undefined);
       return;
     }
-    setIsNewEmailPending(true);
-    setIsResendClicked(false);
-    setError(undefined);
-    setSuccess("New verification code sent to your phone");
+    try {
+      setIsNewEmailPending(true);
+      setIsResendClicked(false);
+      setError(undefined);
+      setSuccess(undefined);
+      const response = await regenerateNumberverificationCode(userId);
+      const { error, success, redirectUrl } = response;
+      setError(error);
 
-    setIsResendClicked(true);
-
-    setIsNewEmailPending(false);
-      
-     
+      setSuccess(success);
+      if (redirectUrl) {
+        push(redirectUrl);
+      }
+      if (success) {
+        setIsResendClicked(true);
+        form.reset()
+      } else {
+        setIsResendClicked(false);
+      }
+    } catch (error) {
+      console.error(`Unable to regenerate new code: ${error}`);
+      setError(unknown_error);
+      setSuccess(undefined);
+    } finally {
+      setIsNewEmailPending(false);
+    }
   }
   return (
     <div>
@@ -121,10 +151,11 @@ export const VerifyPhoneForm: FC = () => {
             )}
           />
           {error && <FormError message={error} />}
-          {success && <FormSuccess message={success} />}
+          {success && !error && <FormSuccess message={success} />}
           <LoadingButton
             message="Verify"
-            isPending={isPending || isNewEmailPending}
+            disabled={isPending || isNewEmailPending}
+            isPending={isPending}
           />
         </form>
       </Form>
@@ -134,7 +165,8 @@ export const VerifyPhoneForm: FC = () => {
         </p>
 
         <RegenerateButton
-          isNewEmailPending={isNewEmailPending || isPending}
+          isNewEmailPending={isNewEmailPending}
+          disabled={isNewEmailPending || isPending}
           isResendClicked={isResendClicked}
           resendCode={resendCode}
           resetCounter={resetCounter}

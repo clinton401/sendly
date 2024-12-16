@@ -5,6 +5,8 @@ import {Navbar} from "@/components/navbar"
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ContextProvider } from "@/components/context-provider";
+
+import getServerUser from "@/hooks/get-server-user";
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200" ,"300" , "400"  , "500", "600", "700", "800",  "900" ] });
 
 export const metadata: Metadata = {
@@ -43,11 +45,13 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  const session = await getServerUser()
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -60,7 +64,7 @@ export default function RootLayout({
             disableTransitionOnChange
           ><Toaster/>
            <ContextProvider>
-            <Navbar />
+            <Navbar session={session}/>
             {children}
            </ContextProvider>
 

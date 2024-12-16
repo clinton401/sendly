@@ -19,7 +19,7 @@ export const Images: FC<ImagesProps> = ({ url, alt, contain = false, gif = false
           url 
         }
         alt={alt}
-        placeholder={typeof url === "object" && gif  ? "blur" : "empty"}
+        placeholder={typeof url === "object" && !gif  ? "blur" : "empty"}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className={`w-full h-full ${contain? "object-contain": "object-cover"}   overflow-hidden rounded object-center `}
         fill={true}

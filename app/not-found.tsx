@@ -7,7 +7,7 @@ const NotFound: FC = () => {
   return (
     <main className="w-full min-h-dvh flex flex-col items-center px-[5%] pt-[100px] pb-8 justify-center gap-4">
       <div className="w-[100px] aspect-square relative">
-        <Images url={errorImg} alt="error gif" />
+        <Images url={errorImg} alt="error gif" gif/>
       </div>
 
       <h1 className="font-cinzel font-black text-center text-3xl">

@@ -17,9 +17,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { FormSuccess } from "@/components/form-success";
 import { LoadingButton } from "@/components/auth/loading-button";
+import { FormError } from "@/components/form-error";
 
+import { unknown_error } from "@/lib/variables";
+import {login} from "@/actions/login"
 export const LoginForm: FC = () => {
   const [success, setSuccess] = useState<undefined | string>(undefined);
+  const [error, setError] = useState<undefined | string>(undefined);
   const [isPending, setIsPending] = useState(false);
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -29,17 +33,36 @@ export const LoginForm: FC = () => {
     },
   });
 
-  const submitHandler = (values: z.infer<typeof LoginSchema>) => {
-    console.log(values);
-    setIsPending(true);
-    setTimeout(() => {
+  async function submitHandler(values: z.infer<typeof LoginSchema>) {
+    try{
+      setIsPending(true);
+      setError(undefined); 
+      setSuccess(undefined);
+      const data = await login(values);
+      const {error, success, redirectUrl} = data;
+      if(error || !success) {
+        setError(error || unknown_error);
+        return ;
+      }
+      setSuccess(success);
+    
+        setSuccess(success); 
       
-      setSuccess(`Login successful`);
+     
+      if(redirectUrl) {
+      
+          window.location.href = redirectUrl;
+      }
+     }catch(error) {
+      console.error(error)
+      setSuccess(undefined);
+      setError("An unexpected error occurred.");
+      console.error(error)
+    } finally {
       setIsPending(false);
-      
-    form.reset()
-      }, 5000)
-  };
+    }
+  
+}
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submitHandler)} className="space-y-4">
@@ -96,8 +119,9 @@ export const LoginForm: FC = () => {
               </Link>
             </Button>
           </div>
-        {success && <FormSuccess message={success} />}
-        <LoadingButton isPending={isPending} message="Login" />
+        {error && <FormError message={error} />}
+        {success && !error && <FormSuccess message={success} />}
+        <LoadingButton isPending={isPending} disabled={isPending} message="Login" />
       </form>
     </Form>
   );

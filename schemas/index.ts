@@ -25,7 +25,7 @@ export const LoginSchema = z.object({
     phone: z
       .string()
       .trim()
-      .regex(/^\+?[1-9]\d{1,14}$/, { message: "Invalid phone number format." }),
+      .regex(/^\+[1-9]\d{1,14}$/, { message: "Invalid phone number format." }),
     password: z
       .string()
       .trim()
@@ -36,7 +36,7 @@ export const LoginSchema = z.object({
     phone: z
       .string()
       .trim()
-      .regex(/^\+?[1-9]\d{1,14}$/, { message: "Invalid phone number format." }),
+      .regex(/^\+[1-9]\d{1,14}$/, { message: "Invalid phone number format." }),
     otp: z.string()
       .trim() 
       .min(6, { message: "OTP must be at least 6 characters long" })
