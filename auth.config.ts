@@ -1,15 +1,14 @@
 import type { NextAuthConfig } from "next-auth";
-import {LoginSchema} from "@/schemas";
-import {validatePassword} from "@/lib/password-utils";
+import { LoginSchema } from "@/schemas";
+import { validatePassword } from "@/lib/password-utils";
 import Credentials from "next-auth/providers/credentials";
 import { UserModel } from "@/nobox/record-structures/user";
 export default {
   providers: [
-
-    Credentials({ 
+    Credentials({
       credentials: {
         phone: { label: "Phone", type: "text" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
@@ -17,9 +16,9 @@ export default {
           console.error("Invalid input fields:", validatedFields.error);
           return null;
         }
-      
+
         const { phone, password } = validatedFields.data;
-        const user = await UserModel.findOne({phone});
+        const user = await UserModel.findOne({ phone });
         if (!user) {
           console.error("User not found ");
           return null;
@@ -29,10 +28,9 @@ export default {
           console.error("Invalid password");
           return null;
         }
-      
+
         return user;
-      }
-      
+      },
     }),
   ],
 } satisfies NextAuthConfig;
