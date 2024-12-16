@@ -50,8 +50,10 @@ export const LoginForm: FC = () => {
       
      
       if(redirectUrl) {
-      
-          window.location.href = redirectUrl;
+      setTimeout(() => {
+
+        window.location.href = redirectUrl;
+      } , 1500)
       }
      }catch(error) {
       console.error(error)
