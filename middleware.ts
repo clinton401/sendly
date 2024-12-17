@@ -1,34 +1,29 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
+import authConfig from "@/auth.config";
+import NextAuth from "next-auth";
+const { auth } = NextAuth(authConfig);
 import { DEFAULT_LOGIN_REDIRECT, authRoutes, publicRoutes, apiAuthPrefix } from "@/routes";
 
-export default async function middleware(req: NextRequest) {
+export default auth((req) => {
   const { nextUrl } = req;
-
-  const session = await getToken({ req, secret: process.env.AUTH_SECRET });
-  
-
-  const isLoggedIn = !!session;
+  const isLoggedIn = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isAuthRoute = authRoutes.some((route) => nextUrl.pathname.startsWith(route));
   const isPublicRoute = publicRoutes.some((route) => nextUrl.pathname === route);
 
 
-  if (isApiAuthRoute) {
-    return NextResponse.next();
-  }
+  if (isApiAuthRoute) return;
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, req.url));
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, req.url));
     }
-    return NextResponse.next();
+    return;
   }
 
   
 
   if (!isLoggedIn && !isPublicRoute && !isAuthRoute) {
-    return NextResponse.redirect(
+    return Response.redirect(
       new URL(
         `/login`,
         req.url
@@ -36,8 +31,8 @@ export default async function middleware(req: NextRequest) {
     );
   }
 
-  return NextResponse.next();
-}
+  return;
+})
 
 export const config = {
   matcher: [
